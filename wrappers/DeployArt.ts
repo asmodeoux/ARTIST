@@ -1,9 +1,11 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from '@ton/core';
 
-export type DeployArtConfig = {};
+export type DeployArtConfig = {
+    res: number;
+};
 
 export function deployArtConfigToCell(config: DeployArtConfig): Cell {
-    return beginCell().endCell();
+    return beginCell().storeUint(config.res, 64).endCell();
 }
 
 export class DeployArt implements Contract {
@@ -25,5 +27,10 @@ export class DeployArt implements Contract {
             sendMode: SendMode.PAY_GAS_SEPARATELY,
             body: beginCell().endCell(),
         });
+    }
+
+    async getCurrentResValue(provider: ContractProvider): Promise<number> {
+        const result = await provider.get('get_res', []);
+        return result.stack.readNumber();
     }
 }

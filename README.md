@@ -24,3 +24,13 @@
 ### Add a new contract
 
 `npx blueprint create ContractName` or `yarn blueprint create ContractName`
+
+### Development Steps
+
+1. Add a new FunC contract in `contracts` folder
+2. Build it using `npx blueprint build` or `yarn blueprint build` to generate the JSON bytecode file
+3. Add a new wrapper in `wrappers` folder
+4. Add a new test in `tests` folder if needed
+5. Update script in `scripts` folder if needed
+6. Update `README.md` if needed
+7. Deploy the contract using `npx blueprint run` or `yarn blueprint run`, choose mainnet or testnet
